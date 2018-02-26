@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+.slider {
+  border-radius: 5px;
+  background: #E0E0E0;
+  width: 610px;
+  height: 15px;
+  margin: 5px;
+  position: fixed;
+}
+
+.thumb {
+  width: 10px;
+  height: 25px;
+  border-radius: 3px;
+  position: absolute;
+  top: -5px;
+  background: blue;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.line {
+  width: 10px;
+  height: 3px;
+  border: none;
+  position: absolute;
+  top: 5px;
+  background: red;
+}
+
+.label {
+  width: 20px;
+  height: 25px;
+  position: absolute;
+  left: -5px;
+  top: -20px;
+  text-align: center;
+}
+
+
+
+

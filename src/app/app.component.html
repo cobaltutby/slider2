@@ -1,0 +1,75 @@
+<p>Please Add intervals and Slide Thumbnails for Test</p>
+<br>
+<br>
+<br>
+<div style="padding: 40px;" (mousemove)="onmousemove($event)" (mouseleave)="onmouseleave()" (mouseup)="onmouseup()">
+  <div id="slider" class="slider">
+    <ng-container *ngFor="let thb of intervals; let index=index">
+      <div [id]="'thumb' + thb.left_idx" class="thumb" [ngStyle]="{'width' : slider_size + 'px'}" (mousedown)="mouseDown($event, thb.left_idx)">
+        <div [id]="'label' + thb.left_idx" class="label" [ngStyle]="{'color' : thb.color, 'width' : slider_size + 'px', 'top' : getTextPosition(thb)}">{{getCoords(getThumbElementById(thb.left_idx)).left}}
+        </div>
+      </div>
+      <div [id]="'thumb' + thb.right_idx" class="thumb" [ngStyle]="{'width' : slider_size + 'px'}" (mousedown)="mouseDown($event, thb.right_idx)">
+        <div [id]="'label' + thb.right_idx" class="label" [ngStyle]="{'color' : thb.color, 'width' : slider_size + 'px', 'top' : getTextPosition(thb)}">{{getCoords(getThumbElementById(thb.right_idx)).left}}
+        </div>
+      </div>
+      <div [id]="'line' + index" class="line" [ngStyle]="{'background' : thb.color, 'left' : getLineLeft(thb), 'width' : getLineWidth(thb)}">
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<mat-form-field>
+  <input matInput type="number" name="slider_size" [min]="1" [max]="40" placeholder="Slider size (px)" [(ngModel)]="slider_size">
+</mat-form-field>
+
+<br>
+
+<mat-form-field>
+  <input matInput type="number" [min]="1" [max]="40" name="min_interval" placeholder="Minimum interval length (px)" [(ngModel)]="min_interval">
+</mat-form-field>
+
+<br>
+
+<form>
+
+  <p>
+    Please Specify Range:
+  </p>
+
+  <mat-form-field>
+    <input matInput type="number" [min]="min_range" [max]="max_value" name="min" placeholder="Enter minimum value" [(ngModel)]="min_value"
+      (change)="updateLimits()" [formControl]="minFormControl">
+    <mat-error *ngIf="minFormControl.hasError('min')">
+      Value must be greater then {{min_range - 1}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" [min]="min_value + 1" [max]="max_range" name="max" placeholder="Enter maximum value" [(ngModel)]="max_value"
+      (change)="updateLimits()" [formControl]="maxFormControl">
+    <mat-error *ngIf="maxFormControl.hasError('max')">
+      Value must be lesser then 610
+    </mat-error>
+  </mat-form-field>
+  <br>
+
+</form>
+
+<br>
+
+<button mat-raised-button (click)="addInterval(false)" color="primary">Add Normal Interval</button>
+<br>
+<br>
+
+<button mat-raised-button (click)="addInterval(true)" color="primary">Add Disabled Interval</button>
+
+<br>
